@@ -68,16 +68,6 @@ As permissões são solicitadas automaticamente durante o primeiro uso.
 3. **Detalhes**: Toque em qualquer foto para ver informações detalhadas e localização
 4. **Organização**: As fotos são automaticamente organizadas por data
 
-## 🤝 Contribuição
-
-Contribuições são sempre bem-vindas! Para contribuir:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
 ## Reportar Bugs
 
 Encontrou um bug? Abra uma [issue](https://github.com/chicolitorafa/galeria/issues) descrevendo:
@@ -88,10 +78,10 @@ Encontrou um bug? Abra uma [issue](https://github.com/chicolitorafa/galeria/issu
 - Screenshots (se aplicável)
 - Informações do dispositivo/sistema
 
-## 📄 Licença
+## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-**Desenvolvido com ❤️ usando React Native e Expo**
+**Desenvolvido com usando React Native e Expo**
 
 Para mais informações, consulte a [documentação do Expo](https://docs.expo.dev/).
