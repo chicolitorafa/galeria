@@ -1,17 +1,17 @@
-# 📸 Galeria de Fotos
+# Galeria de Fotos
 
 Uma aplicação moderna de galeria de fotos desenvolvida em React Native com Expo, oferecendo funcionalidades completas de captura, armazenamento e visualização de imagens com geolocalização.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- 📷 **Captura de Fotos**: Interface intuitiva para tirar fotos usando a câmera do dispositivo
-- 🗺️ **Geolocalização**: Armazenamento automático da localização onde cada foto foi tirada
-- 💾 **Armazenamento Local**: Gerenciamento eficiente de arquivos no sistema local
-- 🖼️ **Galeria Responsiva**: Visualização organizada das fotos em grade
-- 📍 **Informações de Local**: Exibição de dados de localização para cada imagem
-- 🔄 **Navegação Fluida**: Sistema de roteamento otimizado entre telas
+- **Captura de Fotos**: Interface intuitiva para tirar fotos usando a câmera do dispositivo
+- **Geolocalização**: Armazenamento automático da localização onde cada foto foi tirada
+- **Armazenamento Local**: Gerenciamento eficiente de arquivos no sistema local
+- **Galeria Responsiva**: Visualização organizada das fotos em grade
+- **Informações de Local**: Exibição de dados de localização para cada imagem
+- **Navegação Fluida**: Sistema de roteamento otimizado entre telas
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **React Native** - Framework para desenvolvimento mobile
 - **Expo** - Plataforma para desenvolvimento React Native
@@ -20,18 +20,14 @@ Uma aplicação moderna de galeria de fotos desenvolvida em React Native com Exp
 - **expo-location** - Serviços de geolocalização
 - **react-native-async-storage/async-storage** - Armazenamento local
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 - Node.js (versão 16 ou superior)
 - npm ou yarn
 - Expo CLI instalado globalmente
-- Dispositivo físico ou emulador Android/iOS
+- Dispositivos Android/iOS
 
-```bash
-npm install -g @expo/cli
-```
-
-## 🚀 Instalação
+## Instalação
 
 1. **Clone o repositório:**
 ```bash
@@ -56,7 +52,7 @@ expo start
    - Ou pressione `a` para Android emulator
    - Ou pressione `i` para iOS simulator
 
-## 📱 Permissões Necessárias
+## Permissões Necessárias
 
 A aplicação requer as seguintes permissões:
 
@@ -65,7 +61,7 @@ A aplicação requer as seguintes permissões:
 
 As permissões são solicitadas automaticamente durante o primeiro uso.
 
-## 🎯 Como Usar
+## Como Usar
 
 1. **Tirar Fotos**: Navegue até a aba "Câmera" e toque no botão de captura
 2. **Ver Galeria**: Acesse a aba "Galeria" para visualizar todas as fotos
@@ -82,9 +78,9 @@ Contribuições são sempre bem-vindas! Para contribuir:
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## 🐛 Reportar Bugs
+## Reportar Bugs
 
-Encontrou um bug? Abra uma [issue](https://github.com/seu-usuario/galeria-fotos/issues) descrevendo:
+Encontrou um bug? Abra uma [issue](https://github.com/chicolitorafa/galeria/issues) descrevendo:
 
 - Descrição do problema
 - Passos para reproduzir
@@ -95,14 +91,6 @@ Encontrou um bug? Abra uma [issue](https://github.com/seu-usuario/galeria-fotos/
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 🙏 Agradecimentos
-
-- Equipe do Expo pela excelente documentação
-- Comunidade React Native pelo suporte
-- Contribuidores que ajudaram no desenvolvimento
-
----
 
 **Desenvolvido com ❤️ usando React Native e Expo**
 
