@@ -44,7 +44,7 @@ yarn install
 
 3. **Inicie o projeto:**
 ```bash
-expo start
+npx expo start
 ```
 
 4. **Execute no dispositivo:**
