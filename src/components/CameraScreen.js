@@ -151,47 +151,48 @@ const CameraScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-      
-      <CameraView 
-        style={styles.camera} 
-        facing={facing}
-        flash={flash}
-        ref={cameraRef}
-      >
-        {/* Header com controles */}
-        <View style={styles.headerControls}>
-          <TouchableOpacity style={styles.controlButton} onPress={handleClose}>
-            <Ionicons name="close" size={24} color="white" />
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.controlButton} onPress={toggleFlash}>
-            <Ionicons 
-              name={flash === 'off' ? 'flash-off' : flash === 'on' ? 'flash' : 'flash-outline'} 
-              size={24} 
-              color="white" 
-            />
-          </TouchableOpacity>
-        </View>
-
-        {/* Controles inferiores */}
-        <View style={styles.bottomControls}>
-          <View style={styles.controlsContainer}>
-            <TouchableOpacity style={styles.controlButton} onPress={toggleCameraFacing}>
-              <Ionicons name="camera-reverse" size={30} color="white" />
+      <View>
+        <CameraView 
+            style={styles.camera} 
+            facing={facing}
+            flash={flash}
+            ref={cameraRef}
+        >
+            {/* Header com controles */}
+            <View style={styles.headerControls}>
+            <TouchableOpacity style={styles.controlButton} onPress={handleClose}>
+                <Ionicons name="close" size={24} color="white" />
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
-              <View style={styles.captureButtonInner} />
+            
+            <TouchableOpacity style={styles.controlButton} onPress={toggleFlash}>
+                <Ionicons 
+                name={flash === 'off' ? 'flash-off' : flash === 'on' ? 'flash' : 'flash-outline'} 
+                size={24} 
+                color="white" 
+                />
             </TouchableOpacity>
+            </View>
 
-            <View style={{ width: 60 }} />
-          </View>
-          
-          <Text style={styles.flashInfo}>
-            Flash: {flash === 'off' ? 'Desligado' : flash === 'on' ? 'Ligado' : 'Automático'}
-          </Text>
-        </View>
-      </CameraView>
+            {/* Controles inferiores */}
+            <View style={styles.bottomControls}>
+            <View style={styles.controlsContainer}>
+                <TouchableOpacity style={styles.controlButton} onPress={toggleCameraFacing}>
+                <Ionicons name="camera-reverse" size={30} color="white" />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
+                <View style={styles.captureButtonInner} />
+                </TouchableOpacity>
+
+                <View style={{ width: 60 }} />
+            </View>
+            
+            <Text style={styles.flashInfo}>
+                Flash: {flash === 'off' ? 'Desligado' : flash === 'on' ? 'Ligado' : 'Automático'}
+            </Text>
+            </View>
+        </CameraView>
+      </View>
     </SafeAreaView>
   );
 };

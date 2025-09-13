@@ -73,6 +73,7 @@ const GalleryScreen = () => {
 
   // Callback quando uma foto é tirada na câmera
   const handlePhotoTaken = (photo) => {
+    
     const newPhoto = {
       id: Date.now().toString(),
       uri: photo.uri,
@@ -235,7 +236,7 @@ const GalleryScreen = () => {
 
                   {/* Info da foto */}
                   <View style={styles.photoInfo}>
-                    <Text style={styles.photoTimestamp}>
+                    <Text style={styles.photoDataLocation}>
                       Data: {new Date(selectedPhoto.timestamp).toLocaleDateString('pt-BR', {
                         day: '2-digit',
                         month: '2-digit',
@@ -415,11 +416,11 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: 'center'
   },
-  photoTimestamp: {
+  photoDataLocation: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(110, 134, 188, 0.5)',
+    backgroundColor: 'rgba(3, 179, 216, 0.5)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16
