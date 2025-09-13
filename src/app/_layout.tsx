@@ -5,7 +5,6 @@ export default function Layout() {
         <Stack>
             <Stack.Screen name="index" options={{ title: 'Home', headerShown: false}}/>
             <Stack.Screen name="pages/gallery" options={{ title: 'Home'}}/>
-            <Stack.Screen name="pages/image" options={{ title: 'Sessão de fotos'}}/>
         </Stack>
     )
 }
