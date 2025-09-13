@@ -1,5 +1,4 @@
-// screens/GalleryScreen.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -11,65 +10,67 @@ import {
   Dimensions,
   SafeAreaView,
   Alert,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Location from 'expo-location';
-import CameraScreen from '../../components/CameraScreen';
+  Pressable,
+} from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Location from 'expo-location'
+import CameraScreen from '../../components/CameraScreen'
 
-const { width } = Dimensions.get('window');
-const imageSize = (width - 60) / 3;
+const { width } = Dimensions.get('window')
+const imageSize = (width - 60) / 3
 
 const GalleryScreen = () => {
-  const [photos, setPhotos] = useState([]);
-  const [showCamera, setShowCamera] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [showPhotoModal, setShowPhotoModal] = useState(false);
-  const [location, setLocation] = useState(null);
+  const [photos, setPhotos] = useState([])
+  const [showCamera, setShowCamera] = useState(false)
+  const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [showPhotoModal, setShowPhotoModal] = useState(false)
+  const [showPictureSaved, setShowPictureSaved] = useState(false)
+  const [location, setLocation] = useState(null)
 
   // Carregar fotos salvas quando o componente montar
   useEffect(() => {
-    loadSavedPhotos();
-  }, []);
+    loadSavedPhotos()
+  }, [])
 
 
   // Pega a localização ao iniciar
   useEffect(() => {
     async function getCurrentLocation() {
       
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
+        setErrorMsg('Permission to access location was denied')
+        return
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      let location = await Location.getCurrentPositionAsync({})
+      setLocation(location)
     }
 
-    getCurrentLocation();
-  }, []);
+    getCurrentLocation()
+  }, [])
 
   // Função para carregar fotos do AsyncStorage
   const loadSavedPhotos = async () => {
     try {
-      const savedPhotos = await AsyncStorage.getItem('@gallery_photos');
+      const savedPhotos = await AsyncStorage.getItem('@gallery_photos')
       if (savedPhotos) {
-        setPhotos(JSON.parse(savedPhotos));
+        setPhotos(JSON.parse(savedPhotos))
       }
     } catch (error) {
-      console.error('Erro ao carregar fotos:', error);
+      console.error('Erro ao carregar fotos:', error)
     }
-  };
+  }
 
   // Função para salvar fotos no AsyncStorage
   const savePhotos = async (newPhotos) => {
     try {
-      await AsyncStorage.setItem('@gallery_photos', JSON.stringify(newPhotos));
+      await AsyncStorage.setItem('@gallery_photos', JSON.stringify(newPhotos))
     } catch (error) {
-      console.error('Erro ao salvar fotos:', error);
+      console.error('Erro ao salvar fotos:', error)
     }
-  };
+  }
 
   // Callback quando uma foto é tirada na câmera
   const handlePhotoTaken = (photo) => {
@@ -80,28 +81,30 @@ const GalleryScreen = () => {
       timestamp: new Date().toISOString(),
       altitude: location.coords.altitude,
       latitude: location.coords.latitude
-    };
+    }
 
-    const updatedPhotos = [newPhoto, ...photos]; // Adiciona no início
-    setPhotos(updatedPhotos);
-    savePhotos(updatedPhotos);
+    // Adiciona no início
+    const updatedPhotos = [newPhoto, ...photos]
+    setPhotos(updatedPhotos)
+    savePhotos(updatedPhotos)
     
     // Fechar câmera automaticamente após tirar a foto
-    setShowCamera(false);
+    setShowCamera(false)
     
-    Alert.alert('Sucesso!', 'Foto adicionada à galeria!');
-  };
+    // Abre o modal de sucesso
+    setShowPictureSaved(true)
+  }
 
   // Função para fechar a câmera
   const handleCloseCamera = () => {
-    setShowCamera(false);
-  };
+    setShowCamera(false)
+  }
 
   // Função para abrir foto em tela cheia
   const openPhoto = (photo) => {
-    setSelectedPhoto(photo);
-    setShowPhotoModal(true);
-  };
+    setSelectedPhoto(photo)
+    setShowPhotoModal(true)
+  }
 
   // Função para deletar foto
   const deletePhoto = (photoId) => {
@@ -114,16 +117,16 @@ const GalleryScreen = () => {
           text: 'Deletar',
           style: 'destructive',
           onPress: () => {
-            const updatedPhotos = photos.filter(photo => photo.id !== photoId);
-            setPhotos(updatedPhotos);
-            savePhotos(updatedPhotos);
-            setShowPhotoModal(false);
-            setSelectedPhoto(null);
+            const updatedPhotos = photos.filter(photo => photo.id !== photoId)
+            setPhotos(updatedPhotos)
+            savePhotos(updatedPhotos)
+            setShowPhotoModal(false)
+            setSelectedPhoto(null)
           },
         },
       ]
-    );
-  };
+    )
+  }
 
   // Renderizar cada item da galeria
   const renderPhotoItem = ({ item }) => (
@@ -137,7 +140,7 @@ const GalleryScreen = () => {
         <Ionicons name="expand" size={20} color="white" />
       </View>
     </TouchableOpacity>
-  );
+  )
 
   // Botão para adicionar nova foto
   const renderAddButton = () => (
@@ -149,7 +152,7 @@ const GalleryScreen = () => {
       <Ionicons name="add" size={40} color="#007AFF" />
       <Text style={styles.addButtonText}>Tirar Foto</Text>
     </TouchableOpacity>
-  );
+  )
 
   // Renderizar lista vazia
   const renderEmptyList = () => (
@@ -158,7 +161,7 @@ const GalleryScreen = () => {
       <Text style={styles.emptyText}>Nenhuma foto na galeria</Text>
       <Text style={styles.emptySubtext}>Toque no botão + para adicionar sua primeira foto</Text>
     </View>
-  );
+  )
 
   return (
     <SafeAreaView style={styles.container}>
@@ -193,6 +196,24 @@ const GalleryScreen = () => {
           showSaveButton={true}
           autoSave={false}
         />
+      </Modal>
+
+      {/* Modal de confirmação da foto */}
+      <Modal
+        visible={showPictureSaved}
+        animationType="slide"
+        presentationStyle="fullScreen"
+      >
+        <View style={styles.pictureSavedModalContainer}>
+          <View style={styles.pictureSavedModalContent}>
+            <Text style={styles.textPictureSaved}>Foto adicionada à galeria!</Text>
+            <View style={styles.contentClosePictureSaved}>
+              <Pressable onPress={() => setShowPictureSaved(false)} style={styles.buttonClosePictureSaved}>
+                <Text style={styles.textClosePictureSaved}>Fechar</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
       </Modal>
 
       {/* Modal para visualizar foto em tela cheia */}
@@ -266,8 +287,8 @@ const GalleryScreen = () => {
         <Ionicons name="camera" size={28} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -384,6 +405,41 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  pictureSavedModalContainer:{
+    backgroundColor: 'rgba(24, 24, 24, 0.6)',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pictureSavedModalContent: {
+    backgroundColor: '#fff',
+    width: '80%',
+    height: '15%',
+    padding: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8
+  },
+  textPictureSaved: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#01529f'
+  },
+  buttonClosePictureSaved: {
+    marginTop: 8,
+    backgroundColor: '#01529f',
+    padding: 5,
+    borderRadius: 8
+  },
+  textClosePictureSaved: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  contentClosePictureSaved: {
+    flex: 1,
+    width: '30%'
+  },
   fullScreenImage: {
     width: width,
     height: width,
@@ -425,6 +481,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 16
   },
-});
+})
 
-export default GalleryScreen;
+export default GalleryScreen

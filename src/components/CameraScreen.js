@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react'
 import {
   StyleSheet,
   Text,
@@ -8,10 +8,10 @@ import {
   Image,
   SafeAreaView,
   StatusBar,
-} from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
-import { Ionicons } from '@expo/vector-icons';
-import * as MediaLibrary from 'expo-media-library';
+} from 'react-native'
+import { CameraView, useCameraPermissions } from 'expo-camera'
+import { Ionicons } from '@expo/vector-icons'
+import * as MediaLibrary from 'expo-media-library'
 
 const CameraScreen = ({ 
   onPhotoTaken,           // Callback quando foto é tirada
@@ -20,26 +20,27 @@ const CameraScreen = ({
   showSaveButton = true,  // Mostrar botão salvar
   autoSave = false,       // Salvar automaticamente
 }) => {
-  const [facing, setFacing] = useState(initialFacing);
-  const [permission, requestPermission] = useCameraPermissions();
-  const [mediaLibraryPermission, requestMediaLibraryPermission] = MediaLibrary.usePermissions();
-  const [capturedImage, setCapturedImage] = useState(null);
-  const [flash, setFlash] = useState('off');
-  const cameraRef = useRef(null);
+  const [facing, setFacing] = useState(initialFacing)
+  const [permission, requestPermission] = useCameraPermissions()
+  const [mediaLibraryPermission, requestMediaLibraryPermission] = MediaLibrary.usePermissions()
+  const [capturedImage, setCapturedImage] = useState(null)
+  const [flash, setFlash] = useState('off')
+  const cameraRef = useRef(null)
 
   useEffect(() => {
     if (!permission?.granted) {
-      requestPermission();
+      requestPermission()
     }
     if (!mediaLibraryPermission?.granted) {
-      requestMediaLibraryPermission();
+      requestMediaLibraryPermission()
     }
-  }, []);
+  }, [])
 
   if (!permission) {
-    return <View />;
+    return <View />
   }
 
+  // Verifica tem que pedir a permissão de uso da camera
   if (!permission.granted) {
     return (
       <View style={styles.container}>
@@ -50,21 +51,24 @@ const CameraScreen = ({
           <Text style={styles.buttonText}>Conceder Permissão</Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 
+  // Muda a camera pra frontal ou traseira
   function toggleCameraFacing() {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
+    setFacing(current => (current === 'back' ? 'front' : 'back'))
   }
 
+  // Aciona o flash
   function toggleFlash() {
     setFlash(current => {
-      const modes = ['off', 'on', 'auto'];
-      const currentIndex = modes.indexOf(current);
-      return modes[(currentIndex + 1) % modes.length];
-    });
+      const modes = ['off', 'on', 'auto']
+      const currentIndex = modes.indexOf(current)
+      return modes[(currentIndex + 1) % modes.length]
+    })
   }
 
+  // Tira a foto
   async function takePicture() {
     if (cameraRef.current) {
       try {
@@ -72,47 +76,50 @@ const CameraScreen = ({
           quality: 0.8,
           base64: false,
           exif: false,
-        });
+        })
 
-        setCapturedImage(photo.uri);
+        setCapturedImage(photo.uri)
         
         // Callback para o componente pai
         if (onPhotoTaken) {
-          onPhotoTaken(photo);
+          onPhotoTaken(photo)
         }
 
         // Auto salvar se configurado
         if (autoSave && mediaLibraryPermission?.granted) {
-          await MediaLibrary.saveToLibraryAsync(photo.uri);
-          Alert.alert('Salvo!', 'Foto salva automaticamente na galeria!');
+          await MediaLibrary.saveToLibraryAsync(photo.uri)
+          Alert.alert('Salvo!', 'Foto salva automaticamente na galeria!')
         }
         
       } catch (error) {
-        console.error('Erro ao tirar foto:', error);
-        Alert.alert('Erro', 'Não foi possível tirar a foto');
+        console.error('Erro ao tirar foto:', error)
+        Alert.alert('Erro', 'Não foi possível tirar a foto')
       }
     }
   }
 
+  // Grava na galeria
   async function saveToGallery() {
     if (capturedImage && mediaLibraryPermission?.granted) {
       try {
-        await MediaLibrary.saveToLibraryAsync(capturedImage);
-        Alert.alert('Salvo!', 'Foto salva na galeria com sucesso!');
+        await MediaLibrary.saveToLibraryAsync(capturedImage)
+        Alert.alert('Salvo!', 'Foto salva na galeria com sucesso!')
       } catch (error) {
-        console.error('Erro ao salvar:', error);
-        Alert.alert('Erro', 'Não foi possível salvar a foto');
+        console.error('Erro ao salvar:', error)
+        Alert.alert('Erro', 'Não foi possível salvar a foto')
       }
     }
   }
 
+  // Descarte da imagem
   function discardImage() {
-    setCapturedImage(null);
+    setCapturedImage(null)
   }
 
+  // Fechar camera
   function handleClose() {
     if (onClose) {
-      onClose();
+      onClose()
     }
   }
 
@@ -144,58 +151,56 @@ const CameraScreen = ({
           </View>
         </View>
       </SafeAreaView>
-    );
+    )
   }
 
   // Tela da câmera
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <View>
-        <CameraView 
-            style={styles.camera} 
-            facing={facing}
-            flash={flash}
-            ref={cameraRef}
-        >
-            {/* Header com controles */}
-            <View style={styles.headerControls}>
-            <TouchableOpacity style={styles.controlButton} onPress={handleClose}>
-                <Ionicons name="close" size={24} color="white" />
-            </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.controlButton} onPress={toggleFlash}>
-                <Ionicons 
-                name={flash === 'off' ? 'flash-off' : flash === 'on' ? 'flash' : 'flash-outline'} 
-                size={24} 
-                color="white" 
-                />
-            </TouchableOpacity>
-            </View>
+			<StatusBar barStyle="light-content" />      
+			<CameraView 
+					style={styles.camera} 
+					facing={facing}
+					flash={flash}
+					ref={cameraRef}
+			>
+					{/* Header com controles */}
+					<View style={styles.headerControls}>
+					<TouchableOpacity style={styles.controlButton} onPress={handleClose}>
+							<Ionicons name="close" size={24} color="white" />
+					</TouchableOpacity>
+					
+					<TouchableOpacity style={styles.controlButton} onPress={toggleFlash}>
+							<Ionicons 
+							name={flash === 'off' ? 'flash-off' : flash === 'on' ? 'flash' : 'flash-outline'} 
+							size={24} 
+							color="white" 
+							/>
+					</TouchableOpacity>
+					</View>
 
-            {/* Controles inferiores */}
-            <View style={styles.bottomControls}>
-            <View style={styles.controlsContainer}>
-                <TouchableOpacity style={styles.controlButton} onPress={toggleCameraFacing}>
-                <Ionicons name="camera-reverse" size={30} color="white" />
-                </TouchableOpacity>
+					{/* Controles inferiores */}
+					<View style={styles.bottomControls}>
+					<View style={styles.controlsContainer}>
+							<TouchableOpacity style={styles.controlButton} onPress={toggleCameraFacing}>
+							<Ionicons name="camera-reverse" size={30} color="white" />
+							</TouchableOpacity>
 
-                <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
-                <View style={styles.captureButtonInner} />
-                </TouchableOpacity>
+							<TouchableOpacity style={styles.captureButton} onPress={takePicture}>
+							<View style={styles.captureButtonInner} />
+							</TouchableOpacity>
 
-                <View style={{ width: 60 }} />
-            </View>
-            
-            <Text style={styles.flashInfo}>
-                Flash: {flash === 'off' ? 'Desligado' : flash === 'on' ? 'Ligado' : 'Automático'}
-            </Text>
-            </View>
-        </CameraView>
-      </View>
+							<View style={{ width: 60 }} />
+					</View>
+					
+					<Text style={styles.flashInfo}>
+							Flash: {flash === 'off' ? 'Desligado' : flash === 'on' ? 'Ligado' : 'Automático'}
+					</Text>
+					</View>
+			</CameraView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -307,6 +312,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
   },
-});
+})
 
-export default CameraScreen;
+export default CameraScreen
