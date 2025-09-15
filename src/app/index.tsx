@@ -17,7 +17,7 @@ export default function App() {
 
       <Link href='/pages/gallery' asChild>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Entrar</Text>
+          <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
       </Link>
     </View>

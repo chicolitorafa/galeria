@@ -149,7 +149,7 @@ const GalleryScreen = () => {
       onPress={() => setShowCamera(true)}
       activeOpacity={0.8}
     >
-      <Ionicons name="add" size={40} color="#007AFF" />
+      <Ionicons name="add" size={40} color="#007ebc" />
       <Text style={styles.addButtonText}>Tirar Foto</Text>
     </TouchableOpacity>
   )
@@ -305,11 +305,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#212529',
+    color: '#007ebc',
   },
   photoCount: {
     fontSize: 16,
-    color: '#6c757d',
+    color: '#007ebc',
     marginTop: 4,
   },
   photosList: {
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#007AFF',
+    borderColor: '#007ebc',
     borderStyle: 'dashed',
     justifyContent: 'center',
     alignItems: 'center',
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   addButtonText: {
-    color: '#007AFF',
+    color: '#007ebc',
     fontSize: 16,
     fontWeight: '600',
     marginTop: 8,
@@ -380,14 +380,14 @@ const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
     right: 20,
-    bottom: 30,
+    bottom: 60,
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#007ebc',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 8,
+    elevation: 6,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
